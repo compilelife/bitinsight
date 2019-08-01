@@ -15,9 +15,17 @@
 
 # 运行截图
 
+主窗口运行效果
+
 ![mainwnd](doc/image/mainwnd.png)
 
+透视图（根据分析需求自定义字段）
+
 ![perspective](doc/image/perspective.png)
+
+插件开发示意（图中从左到右：wav头格式，插件解析代码，工具运行效果）
+
+![plugin](doc/image/plugin.png)
 
 # 开发中
 
