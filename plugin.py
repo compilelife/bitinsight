@@ -9,12 +9,14 @@ class Plugin:
         self.exports = {}
         self.doc = Doc()
         self.default = ''
+        self.name = ''
 
 def load_plugin(name):
     mod = import_module('.main', 'plugins.'+name)
     bs = BitStream(bytes([]))
     t = Table('inspect', None, bs)
     plugin = Plugin()
+    plugin.name = name
 
     for attr in dir(mod):
         if attr.startswith('__'):
