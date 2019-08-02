@@ -8,10 +8,9 @@ import time
 import traceback
 from PySide2.QtWidgets import *
 from PySide2.QtCore import *
+import re
 
-#焦点widget高亮
-#菜单 文件（打开、最近文件、设置（历史数、关于））|插件(加载，查阅文档) |焦点widget菜单？
-#文档图片的大小调整、图片位置调整、双击查看大图
+#菜单 文件（打开、最近文件、设置（历史数、关于））|插件(加载，查阅文档)
 #toast(info/warn)+日志窗口
 #工作区概念（保存历史、上下文等）
 #editor内存泄漏?
@@ -170,8 +169,13 @@ class DocViewer:
     def __init__(self):
         self.editor = QTextEdit()
         self.editor.setReadOnly(True)
+        self.img_path=''
+
+    def __fix_img_path(self, matched):
+        return '![%s](%s)'%(matched.group(1), self.img_path+'/'+matched.group(2))
 
     def __markup_doc(self, text):
+        text=re.sub(r'!\[(\w+)\]\((\w+/\w+.\w+)\)', self.__fix_img_path, text)
         body = mk.markdown(text, extras=['tables','code-friendly'])
         html = '''<html>
         <head>
@@ -582,6 +586,7 @@ class MainWnd(QMainWindow):
         suffix = file_info.suffix()
         if not self.plugin or self.plugin.name != suffix:
             self.plugin = plugin.load_plugin(file_info.suffix())
+            self.doc_viewer.img_path = 'plugins/'+suffix
         self.set_plugin_default(self.plugin.default)
         
 
