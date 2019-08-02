@@ -9,7 +9,6 @@ import traceback
 from PySide2.QtWidgets import *
 from PySide2.QtCore import *
 
-#右键复制鼠标下的item
 #焦点widget高亮
 #菜单 文件（打开、最近文件、设置（历史数、关于））|插件(加载，查阅文档) |焦点widget菜单？
 #文档图片的大小调整、图片位置调整、双击查看大图
@@ -211,14 +210,30 @@ class TableViewer(QObject):
         self.widget.setColumnCount(3)
         self.widget.setHeaderLabels(['名字','值','长度(bits)'])
         self.widget.currentItemChanged.connect(self.__on_current_item_changed)
-        self.widget.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.widget.customContextMenuRequested.connect(self.show_context_menu)
-        self.__menu = self.__create_menu()
+        self.widget.setContextMenuPolicy(QtCore.Qt.ActionsContextMenu)
 
-    def __create_menu(self):
-        menu = QMenu()
-        menu.addAction('添加当前字段到上下文中').triggered.connect(self.add_current_to_context)
-        return menu
+        self.__actions = []
+        self.__add_action('添加到上下文', self.add_current_to_context)
+        self.__add_action('复制', self.copy_item)
+
+    def __add_action(self, name, proc):
+       action = QtWidgets.QAction(name)
+       action.triggered.connect(proc)
+       self.__actions.append(action)
+       self.widget.addAction(action)
+
+    def copy_item(self):
+        item = self.widget.currentItem()
+        col = self.widget.currentColumn()
+        if self.__fields.__contains__(item):
+            (field, dockey) = self.__fields[item]
+            clipboard = QApplication.clipboard()
+            if col == 0:
+                clipboard.setText(field.name)
+            elif col == 1:
+                clipboard.setText(str(field.value))
+            elif col == 2:
+                clipboard.setText(str(field.end.bits_count()-field.begin.bits_count()))
 
     def show_context_menu(self, point):
         self.__menu.exec_(self.widget.mapToGlobal(point))
