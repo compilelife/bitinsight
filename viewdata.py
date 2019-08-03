@@ -123,7 +123,7 @@ class MemoryViewer(DataViewer):
         self._impl = BitViewer(self.editor) if bit else ByteViewer(self.editor)
 
         self.__load_to_impl()
-        self._impl.moveto(self._to_impl_pos(self.__pos))
+        self._impl.moveto(self._to_impl_pos(pos))
         if len(self._highlight) > 0:
             self._impl.highlight(self._to_impl_pos(self._highlight[0]), self._to_impl_pos(self._highlight[1]))
 

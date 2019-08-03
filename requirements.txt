@@ -7,7 +7,7 @@ bandit==1.6.2
 bitstream==2.5.4
 btrfsutil==1.1.1
 CacheControl==0.12.5
-catfish==1.4.7
+catfish==1.4.8
 chardet==3.0.4
 colorama==0.4.1
 cupshelpers==1.0
@@ -26,7 +26,7 @@ lensfun==0.3.2
 lightdm-gtk-greeter-settings==1.2.2
 lockfile==0.12.2
 louis==3.10.0
-lxml==4.3.4
+lxml==4.4.0
 markdown2==2.3.8
 menulibre==2.2.0
 msgpack==0.6.1

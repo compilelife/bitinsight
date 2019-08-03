@@ -10,10 +10,9 @@ from PySide2.QtWidgets import *
 from PySide2.QtCore import *
 import re
 
-#菜单 文件（打开、最近文件、设置（历史数、关于））|插件(加载，查阅文档)
-#toast(info/warn)+日志窗口
-#工作区概念（保存历史、上下文等）
-#editor内存泄漏?
+#菜单 文件（打开、最近文件）|插件(加载，查阅文档)|关于
+#跨平台选择等宽字体
+#插件编写文档
 
 def show_modal_error(str):
     msg = QMessageBox()
@@ -298,6 +297,7 @@ class ChooseParserDlg(QDialog):
 
     def __init__(self, p, default):
         super(ChooseParserDlg, self).__init__()
+        self.setWindowTitle('选择解析器')
         self.parsers = list(p.exports.keys())
         self.default = default
         self.list = QListWidget()
@@ -355,6 +355,7 @@ class PerspectiveDlg(QDialog):
 
     def __init__(self, items, fields):
         super(PerspectiveDlg, self).__init__()
+        self.setWindowTitle('透视图')
         self.items = items
         self.table = QTableWidget()
         self.table.setColumnCount(len(fields))
@@ -394,6 +395,7 @@ class MainWnd(QMainWindow):
         self.setup_ui()
 
     def setup_ui(self):
+        self.setWindowTitle('bitinsight')
         layout = QGridLayout()
 
         # 左侧视图

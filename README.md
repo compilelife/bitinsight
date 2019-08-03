@@ -39,7 +39,7 @@
 
 # 如何运行
 
-后续计划每版本发布linux/mac/windows三个平台的可执行程序
+后续计划为linux/mac/windows三个平台发布可执行程序
 
 现在还只能在python环境下运行
 
@@ -47,6 +47,17 @@
 pip install -r requirements.txt
 python app.py
 ```
+
+如果通过`requirements.txt`按照碰到问题，也可以直接运行`python app.py`，根据提示安装缺少的模块。
+
+一般需要：
+
+```
+pip install markdown2
+pip install PySide2
+```
+
+需要运行环境：python3
 
 # 需要你的帮助
 
