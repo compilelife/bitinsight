@@ -3,6 +3,7 @@ from table import BitPos
 from bitstream import *
 import mmap
 import weakref
+import platform
 
 class DataViewer:
     def __init__(self, editor):
@@ -228,8 +229,12 @@ class DataViewerEditor(QtWidgets.QPlainTextEdit):
 
     def __init__(self, viewer: MemoryViewer):
         super(DataViewerEditor, self).__init__();
+
+        family = 'monospace'
+        if platform.system() == 'Darwin':
+            family = 'Menlo'
         
-        self.setFont(QtGui.QFont('monospace'))
+        self.setFont(QtGui.QFont(family))
         self.__viewer = weakref.ref(viewer)
         self.setCursorWidth(6)
 
