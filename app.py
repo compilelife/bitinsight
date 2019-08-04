@@ -11,7 +11,6 @@ from PySide2.QtCore import *
 import re
 
 #菜单 文件（打开、最近文件）|插件(加载，查阅文档)|关于
-#插件编写文档
 
 def show_modal_error(str):
     msg = QMessageBox()

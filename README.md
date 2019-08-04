@@ -65,4 +65,6 @@ pip install PySide2
 
 因此，只有众人拾柴，一起贡献各种协议、文件格式的解析插件，才能让工具真正强大起来。
 
+插件编写说明文档：[plugin说明文档](doc/PLUGIN.md)
+
 欢迎通过pull request的方式提交插件扩展。
