@@ -11,6 +11,9 @@ from PySide2.QtCore import *
 import re
 
 #菜单 文件（打开、最近文件）|插件(加载，查阅文档)|关于
+#最近文件
+#通过点选的方式创建透视图（而不是输入很长的名字）
+#透视图支持filter功能
 
 def show_modal_error(str):
     msg = QMessageBox()
@@ -267,6 +270,7 @@ class TableViewer(QObject):
         item = QTreeWidgetItem()
         self.__fields[item] = (d, d.name)
         item.setText(0, d.name)
+        item.setText(1, str(d.begin)+'=>'+str(d.end))
         item.setText(2, str(d.end.bits_count() - d.begin.bits_count()))
         for f in d.fields:
             if type(f) == Table:
@@ -351,6 +355,12 @@ class ChooseParserDlg(QDialog):
 class PerspectiveDlg(QDialog):
     show_item_requested = Signal(Table)
 
+    def header_labels(self, fields):
+        labels = []
+        for f in fields:
+            labels.append(f.split('.')[-1])
+        return labels
+
     def __init__(self, items, fields):
         super(PerspectiveDlg, self).__init__()
         self.setWindowTitle('透视图')
@@ -359,7 +369,7 @@ class PerspectiveDlg(QDialog):
         self.table.setColumnCount(len(fields))
         self.table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
-        self.table.setHorizontalHeaderLabels(fields)
+        self.table.setHorizontalHeaderLabels(self.header_labels(fields))
         self.table.currentItemChanged.connect(self.__on_current_item_changed)
         for i in range(len(items)):
             item = items[i]
