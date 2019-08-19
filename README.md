@@ -48,7 +48,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-如果通过`requirements.txt`按照碰到问题，也可以直接运行`python app.py`，根据提示安装缺少的模块。
+如果通过`requirements.txt`安装碰到问题，也可以直接运行`python app.py`，根据提示安装缺少的模块。
 
 一般需要：
 
