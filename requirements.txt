@@ -47,7 +47,7 @@ pycairo==1.18.1
 pycodestyle==2.5.0
 pycups==1.9.74
 pycurl==7.43.0.3
-Pygments==2.4.2
+Pygments==2.7.4
 PyGObject==3.32.2
 PyInstaller==3.5
 pyparsing==2.4.0
