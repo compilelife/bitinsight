@@ -32,7 +32,7 @@ menulibre==2.2.0
 msgpack==0.6.1
 mugshot==0.4.1
 npyscreen==4.10.5
-numpy==1.16.4
+numpy==1.22.0
 objgraph==3.4.1
 packaging==19.0
 pacman-mirrors==4.14.2
